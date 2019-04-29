@@ -1,0 +1,45 @@
+---
+
+- name: Set SELinux to permissive on the fly
+  command: setenforce 0
+  changed_when: false
+  tags: selinux, gitlab-runner
+
+- name: Set SELinux to permissive on boot
+  lineinfile: dest="/etc/sysconfig/selinux" regexp="^SELINUX=" line="SELINUX=permissive" state=present
+  tags: selinux, gitlab-runner
+
+- name: Add Gitlab-runner YUM repo file
+  copy:
+    src: runner_gitlab-runner.repo
+    dest: /etc/yum.repos.d/runner_gitlab-runner.repo
+  tags: gitlab-runner
+
+# Workaround to import GPG key after repo is added
+- name: Update yum package cache and import GPG key
+  command: yum makecache -y warn=False
+  changed_when: false
+  tags: yum, gitlab-runner
+
+- name: Install packages
+  yum:
+    name:
+      - ca-certificates
+      - docker
+      - gitlab-runner
+  tags: gitlab-runner, docker
+
+- name: Enable docker service to run on boot and start it
+  service: name=docker enabled=yes state=started
+  tags: gitlab-runner, docker
+
+- name: Enable gitlab-runner service to run on boot
+  service: name=gitlab-runner enabled=yes
+  tags: gitlab-runner
+
+- name: Add weekly docker cleanup job
+  cron:
+    name: "docker cleanup"
+    special_time: weekly
+    job: "docker system prune -a -f"
+  tags: gitlab-runner, docker
