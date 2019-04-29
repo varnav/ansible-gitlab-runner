@@ -1,0 +1,20 @@
+galaxy_info:
+  author: Eugene Varnavsky
+  description: OpenDKIM role for RHEL OS family
+  issue_tracker_url: https://github.com/varnav/ansible-gitlab-runner/issues
+  license: MIT
+  
+  min_ansible_version: 1.6
+
+  platforms:
+
+  - name: EL
+    versions:
+    - 6
+    - 7
+
+    galaxy_tags:
+    - mail
+    - dkim
+    - opendkim
+    - postfix
