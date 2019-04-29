@@ -1,1 +1,1 @@
-# ansible-docker-runner
+[![Build Status](https://travis-ci.org/varnav/ansible-gitlab-runner.svg?branch=master)](https://travis-ci.org/varnav/ansible-gitlab-runner)
