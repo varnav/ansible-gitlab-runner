@@ -16,8 +16,3 @@ Example Playbook
   roles:
        - varnav.ansible_gitlab_runner
 ```
-
-How to run
-----------
-
-`ansible-playbook opendkim.yml --limit mailservers`
