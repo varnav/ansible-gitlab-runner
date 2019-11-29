@@ -19,10 +19,11 @@
 - name: Update yum package cache and import GPG key
   command: yum makecache -y warn=False
   changed_when: false
+  when: ansible_distribution_major_version|int < 8
   tags: yum, gitlab-runner
 
 - name: Install packages
-  yum:
+  package:
     name:
       - ca-certificates
       - docker

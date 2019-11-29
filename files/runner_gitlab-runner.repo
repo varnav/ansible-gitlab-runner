@@ -1,6 +1,6 @@
 [runner_gitlab-runner]
 name=runner_gitlab-runner
-baseurl=https://packages.gitlab.com/runner/gitlab-runner/el/7/$basearch
+baseurl=https://packages.gitlab.com/runner/gitlab-runner/el/$releasever/$basearch
 repo_gpgcheck=1
 gpgcheck=0
 enabled=1
@@ -11,7 +11,7 @@ metadata_expire=300
 
 [runner_gitlab-runner-source]
 name=runner_gitlab-runner-source
-baseurl=https://packages.gitlab.com/runner/gitlab-runner/el/7/SRPMS
+baseurl=https://packages.gitlab.com/runner/gitlab-runner/el/$releasever/SRPMS
 repo_gpgcheck=1
 gpgcheck=0
 enabled=1
